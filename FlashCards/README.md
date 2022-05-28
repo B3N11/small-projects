@@ -3,8 +3,8 @@ A primitive and open source flashcard displayer written in C# (winforms).
 The application has the following features currently (2022.05.28):
   - creating a **flashcard deck** from a file that needs a
     specific format:
-                    - one line contains one flashcard
-                    - the front side of the card is separated from the back side with a special character                    
+      - one line contains one flashcard
+      - the front side of the card is separated from the back side with a special character                    
   - navigating between flashcards with a **Next**, **Previous** and **Reset** buttons
   - **Shuffle** the cards in a deck
   - **Flip** the card to its back or its front
