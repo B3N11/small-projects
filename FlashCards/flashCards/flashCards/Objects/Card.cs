@@ -7,5 +7,7 @@ namespace flashCards.Objects
         public string GetFront();
 
         public string GetBack();
+
+        public bool CreateCard(string line, char separator);
     }
 }

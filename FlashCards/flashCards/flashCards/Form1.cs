@@ -16,7 +16,7 @@ namespace flashCards
         {
             InitializeComponent();
             handler = Handler.Instance;
-            handler.Start();
+            handler.Start(new FlashCard());
         }
 
         private void readFile_button_Click(object sender, EventArgs e)

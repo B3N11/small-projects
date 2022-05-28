@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.IO;
 using flashCards.Objects;
 
@@ -14,16 +15,23 @@ namespace flashCards.Run
         #endregion
 
         private DeckHandler deckHandler;
+        private ICard cardType;
+        private bool started = false;
 
         #region General
 
-        public void Start()
+        public void Start(ICard type)
         {
             deckHandler = DeckHandler.Instance;
+            cardType = type;
+            started = true;
         }
 
         public bool GetDeckFromFile(string deckName, string filePath, char separator, Encoding encoding)
         {
+            if (!started)
+                throw new Exception("Handler has not been started yet. Call Handler.Start() first!");
+
             if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(separator.ToString()) || string.IsNullOrEmpty(deckName))
                 return false;
 
@@ -35,13 +43,15 @@ namespace flashCards.Run
             {
                 do
                 {
-                    string[] line = reader.ReadLine().Split(separator);
+                    string line = reader.ReadLine();
 
                     if (line.Length == 0)
                         break;
 
-                    FlashCard card = new FlashCard(line[0], line[1]);
-                    deck.AddCard(card);
+                    ICard asd = (ICard)Activator.CreateInstance(cardType.GetType());
+                    asd.CreateCard(line, separator);
+
+                    deck.AddCard(asd);
 
                 } while (reader.Peek() >= 0);                                
             }

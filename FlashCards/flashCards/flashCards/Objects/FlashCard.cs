@@ -7,10 +7,16 @@ namespace flashCards.Objects
         private string front;
         private string back;
 
-        public FlashCard(string front, string back)
+        public bool CreateCard(string line, char separator)
         {
-            this.front = front;
-            this.back = back;
+            if (string.IsNullOrEmpty(separator.ToString()))
+                return false;
+
+            string[] split = line.Split(separator);
+            front = split[0];
+            back = split[1];
+
+            return true;
         }
 
         public string GetBack()
