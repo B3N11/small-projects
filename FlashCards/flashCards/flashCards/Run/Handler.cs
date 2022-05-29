@@ -8,15 +8,21 @@ namespace flashCards.Run
     class Handler
     {
         #region Singleton
+
         private static Handler handler = new Handler();
         public static Handler Instance { get { return handler; } }
 
         private Handler() { }
+
         #endregion
+
+        #region Properties
 
         private DeckHandler deckHandler;
         private ICard cardType;
         private bool started = false;
+
+        #endregion
 
         #region General
 
@@ -39,22 +45,30 @@ namespace flashCards.Run
                 return false;
 
             Deck deck = new Deck(deckName);
-            using (StreamReader reader = new StreamReader(filePath, encoding))
+
+            try
             {
-                do
+                using (StreamReader reader = new StreamReader(filePath, encoding))
                 {
-                    string line = reader.ReadLine();
+                    do
+                    {
+                        string line = reader.ReadLine();
 
-                    if (line.Length == 0)
-                        break;
+                        if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+                            break;
 
-                    ICard asd = (ICard)Activator.CreateInstance(cardType.GetType());
-                    asd.CreateCard(line, separator);
+                        ICard card = (ICard)Activator.CreateInstance(cardType.GetType());
+                        bool result = card.CreateCard(line, separator);
 
-                    deck.AddCard(asd);
+                        if (!result)
+                            return false;
 
-                } while (reader.Peek() >= 0);                                
+                        deck.AddCard(card);
+
+                    } while (reader.Peek() >= 0);
+                }
             }
+            catch { return false; }
 
             if (deck.CardCount == 0)
                 return false;
@@ -68,17 +82,17 @@ namespace flashCards.Run
         #region UI Commands
         public ICard GetCard(int direction = 0)
         {
-            return deckHandler.SelectedDeck.GetCard(direction);
+            return deckHandler.SelectedDeck?.GetCard(direction);
         }
 
         public void Shuffle()
         {
-            deckHandler.SelectedDeck.Shuffle(true);
+            deckHandler.SelectedDeck?.Shuffle(true);
         }
 
         public void ResetDeck()
         {
-            deckHandler.SelectedDeck.ModifyCardIndex(0, true);
+            deckHandler.SelectedDeck?.ModifyCardIndex(0, true);
         }
         #endregion
     }

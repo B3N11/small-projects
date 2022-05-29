@@ -28,8 +28,10 @@ namespace flashCards
             if (string.IsNullOrEmpty(separator))
                 return;
 
-            handler.GetDeckFromFile(deckName, filePath, separator[0], Encoding.Default);
-            reset_button_Click(null, null);
+            bool result = handler.GetDeckFromFile(deckName, filePath, separator[0], Encoding.Default);
+
+            if (!result) MessageBox.Show("An unexpected problem occured during the reading of the file. Please check the format of the content in the file! One card in a line in the following format: [frontside(separator)backside].", "File reading error");
+            else reset_button_Click(null, null);
         }
 
         private void open_textBox_Click(object sender, EventArgs e)
