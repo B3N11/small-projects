@@ -33,16 +33,19 @@ namespace flashCards.Run
             started = true;
         }
 
-        public bool GetDeckFromFile(string deckName, string filePath, char separator, Encoding encoding)
+        public string CreateDeck(string deckName, string filePath, char separator, Encoding encoding)
         {
             if (!started)
-                throw new Exception("Handler has not been started yet. Call Handler.Start() first!");
+                throw new Exception("Handler has not been started yet. Call Handler.Start() first!");            
 
             if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(separator.ToString()) || string.IsNullOrEmpty(deckName))
-                return false;
+                return "There was a problem with the given information.";
+
+            if (deckHandler.GetDeck(deckName) != null)
+                return "Deck with similar name already exists.";
 
             if (!File.Exists(filePath))
-                return false;
+                return "The file does not exist.";
 
             Deck deck = new Deck(deckName);
 
@@ -61,26 +64,25 @@ namespace flashCards.Run
                         bool result = card.CreateCard(line, separator);
 
                         if (!result)
-                            return false;
+                            return "There was a problem with reading the file";
 
                         deck.AddCard(card);
 
                     } while (reader.Peek() >= 0);
                 }
             }
-            catch { return false; }
+            catch { return "There was a problem with reading the file"; }
 
             if (deck.CardCount == 0)
-                return false;
+                return "The file is empty.";
 
             deckHandler.AddDeck(deck);
-            deckHandler.SelectDeck(deckName);
-            return true;
+            return null;
         }
         #endregion
 
         #region UI Commands
-        public ICard GetCard(int direction = 0)
+        public GetCardResult GetCard(int direction = 0)
         {
             return deckHandler.SelectedDeck?.GetCard(direction);
         }
@@ -93,6 +95,30 @@ namespace flashCards.Run
         public void ResetDeck()
         {
             deckHandler.SelectedDeck?.ModifyCardIndex(0, true);
+        }
+
+        public void SelectDeck(string deckName)
+        {
+            if (string.IsNullOrEmpty(deckName))
+                return;
+
+            deckHandler.SelectDeck(deckName);
+        }
+
+        public void DeleteDeck(string deckName)
+        {
+            if (string.IsNullOrEmpty(deckName))
+                return;
+
+            deckHandler.RemoveDeck(deckName);
+        }
+
+        public string GetSelectedDeckName()
+        {
+            if (deckHandler.SelectedDeck == null)
+                return null;
+
+            return deckHandler.SelectedDeck.DeckName;
         }
         #endregion
     }

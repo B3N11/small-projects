@@ -16,3 +16,4 @@ F:\My Projects\Other\rnd\flashCards\flashCards\flashCards\obj\Debug\net5.0-windo
 F:\My Projects\Other\rnd\flashCards\flashCards\flashCards\obj\Debug\net5.0-windows\ref\flashCards.dll
 F:\My Projects\Other\rnd\flashCards\flashCards\flashCards\obj\Debug\net5.0-windows\flashCards.pdb
 F:\My Projects\Other\rnd\flashCards\flashCards\flashCards\obj\Debug\net5.0-windows\flashCards.genruntimeconfig.cache
+F:\My Projects\Other\rnd\flashCards\flashCards\flashCards\obj\Debug\net5.0-windows\flashCards.Form2.resources

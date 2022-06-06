@@ -4,8 +4,9 @@ namespace flashCards.Objects
 {
     class FlashCard : ICard
     {
-        private string front;
-        private string back;
+        private string front = string.Empty;
+        private string back = string.Empty;
+        private string other = string.Empty;
 
         public bool CreateCard(string line, char separator)
         {
@@ -20,6 +21,9 @@ namespace flashCards.Objects
             front = split[0];
             back = split[1];
 
+            if (split.Length >= 3)
+                other = split[2];
+
             return true;
         }
 
@@ -31,6 +35,11 @@ namespace flashCards.Objects
         public string GetFront()
         {
             return front;
+        }
+
+        public string GetOther()
+        {
+            return other;
         }
     }
 }

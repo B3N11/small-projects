@@ -41,6 +41,10 @@ namespace flashCards
             this.shuffle_button = new System.Windows.Forms.Button();
             this.reset_button = new System.Windows.Forms.Button();
             this.open_textBox = new System.Windows.Forms.Button();
+            this.other_button = new System.Windows.Forms.Button();
+            this.cardCount_textBox = new System.Windows.Forms.TextBox();
+            this.decks_comboBox = new System.Windows.Forms.ComboBox();
+            this.deleteDeck_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // filePath_textBox
@@ -57,7 +61,7 @@ namespace flashCards
             this.readFile_button.Name = "readFile_button";
             this.readFile_button.Size = new System.Drawing.Size(318, 23);
             this.readFile_button.TabIndex = 1;
-            this.readFile_button.Text = "Create deck from file";
+            this.readFile_button.Text = "Generate flashcards";
             this.readFile_button.UseVisualStyleBackColor = true;
             this.readFile_button.Click += new System.EventHandler(this.readFile_button_Click);
             // 
@@ -91,7 +95,7 @@ namespace flashCards
             // content_textBox
             // 
             this.content_textBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.content_textBox.Location = new System.Drawing.Point(12, 251);
+            this.content_textBox.Location = new System.Drawing.Point(12, 282);
             this.content_textBox.Multiline = true;
             this.content_textBox.Name = "content_textBox";
             this.content_textBox.ReadOnly = true;
@@ -112,7 +116,7 @@ namespace flashCards
             // 
             // flip_button
             // 
-            this.flip_button.Location = new System.Drawing.Point(12, 199);
+            this.flip_button.Location = new System.Drawing.Point(12, 230);
             this.flip_button.Name = "flip_button";
             this.flip_button.Size = new System.Drawing.Size(318, 46);
             this.flip_button.TabIndex = 8;
@@ -150,11 +154,56 @@ namespace flashCards
             this.open_textBox.UseVisualStyleBackColor = true;
             this.open_textBox.Click += new System.EventHandler(this.open_textBox_Click);
             // 
+            // other_button
+            // 
+            this.other_button.Location = new System.Drawing.Point(12, 199);
+            this.other_button.Name = "other_button";
+            this.other_button.Size = new System.Drawing.Size(318, 25);
+            this.other_button.TabIndex = 12;
+            this.other_button.Text = "Show other";
+            this.other_button.UseVisualStyleBackColor = true;
+            this.other_button.Click += new System.EventHandler(this.other_button_Click);
+            // 
+            // cardCount_textBox
+            // 
+            this.cardCount_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cardCount_textBox.Enabled = false;
+            this.cardCount_textBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cardCount_textBox.Location = new System.Drawing.Point(12, 545);
+            this.cardCount_textBox.Name = "cardCount_textBox";
+            this.cardCount_textBox.ReadOnly = true;
+            this.cardCount_textBox.Size = new System.Drawing.Size(318, 22);
+            this.cardCount_textBox.TabIndex = 13;
+            this.cardCount_textBox.Text = "0 / 0";
+            this.cardCount_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // decks_comboBox
+            // 
+            this.decks_comboBox.FormattingEnabled = true;
+            this.decks_comboBox.Location = new System.Drawing.Point(12, 107);
+            this.decks_comboBox.Name = "decks_comboBox";
+            this.decks_comboBox.Size = new System.Drawing.Size(212, 23);
+            this.decks_comboBox.TabIndex = 14;
+            // 
+            // deleteDeck_button
+            // 
+            this.deleteDeck_button.Location = new System.Drawing.Point(232, 107);
+            this.deleteDeck_button.Name = "deleteDeck_button";
+            this.deleteDeck_button.Size = new System.Drawing.Size(98, 23);
+            this.deleteDeck_button.TabIndex = 15;
+            this.deleteDeck_button.Text = "Delete";
+            this.deleteDeck_button.UseVisualStyleBackColor = true;
+            this.deleteDeck_button.Click += new System.EventHandler(this.deleteDeck_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 523);
+            this.ClientSize = new System.Drawing.Size(344, 580);
+            this.Controls.Add(this.deleteDeck_button);
+            this.Controls.Add(this.decks_comboBox);
+            this.Controls.Add(this.cardCount_textBox);
+            this.Controls.Add(this.other_button);
             this.Controls.Add(this.open_textBox);
             this.Controls.Add(this.reset_button);
             this.Controls.Add(this.shuffle_button);
@@ -167,8 +216,8 @@ namespace flashCards
             this.Controls.Add(this.readFile_button);
             this.Controls.Add(this.filePath_textBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(360, 562);
-            this.MinimumSize = new System.Drawing.Size(360, 562);
+            this.MaximumSize = new System.Drawing.Size(360, 619);
+            this.MinimumSize = new System.Drawing.Size(360, 619);
             this.Name = "Form1";
             this.Text = "FlashCards";
             this.ResumeLayout(false);
@@ -189,6 +238,10 @@ namespace flashCards
         private System.Windows.Forms.Button shuffle_button;
         private System.Windows.Forms.Button reset_button;
         private System.Windows.Forms.Button open_textBox;
+        private System.Windows.Forms.Button other_button;
+        private System.Windows.Forms.TextBox cardCount_textBox;
+        private System.Windows.Forms.ComboBox decks_comboBox;
+        private System.Windows.Forms.Button deleteDeck_button;
     }
 }
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using flashCards.Objects;
 
-namespace flashCards.Objects
+namespace flashCards.Run
 {
     class DeckHandler
     {
@@ -22,7 +23,21 @@ namespace flashCards.Objects
         #region Methods
         public void AddDeck(Deck deck)
         {
+            if (deck == null)
+                return;
+
             decks.Add(deck);
+        }
+
+        public void RemoveDeck(string deckName)
+        {
+            if (string.IsNullOrEmpty(deckName))
+                return;
+
+            if (SelectedDeck.DeckName == deckName)
+                SelectedDeck = null;
+
+            decks.Remove(decks.First(d => d.DeckName == deckName));
         }
 
         public bool SelectDeck(string deckName)
@@ -35,6 +50,17 @@ namespace flashCards.Objects
 
             SelectedDeck = decks.First(d => d.DeckName == deckName);
             return true;
+        }
+
+        public Deck GetDeck(string deckName)
+        {
+            if (string.IsNullOrEmpty(deckName))
+                return null;
+
+            if (decks.Exists(d => d.DeckName == deckName))
+                return decks.First(d => d.DeckName == deckName);
+
+            return null;
         }
         #endregion
     }

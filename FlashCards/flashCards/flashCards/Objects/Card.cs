@@ -2,11 +2,13 @@
 
 namespace flashCards.Objects
 {
-    interface ICard
+    public interface ICard
     {
         public string GetFront();
 
         public string GetBack();
+
+        public string GetOther();
 
         public bool CreateCard(string line, char separator);
     }

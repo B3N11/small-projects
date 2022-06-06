@@ -58,7 +58,7 @@ namespace flashCards.Objects
             return true;
         }
 
-        public ICard GetCard(int direction = 0)
+        public GetCardResult GetCard(int direction = 0)
         {
             if (cards.Count == 0)
                 return null;
@@ -66,7 +66,12 @@ namespace flashCards.Objects
             direction = Math.Clamp(direction, -1, 1);
             ModifyCardIndex(direction);
 
-            return cards[cardIndex];
+            var result = new GetCardResult();
+            result.card = cards[cardIndex];
+            result.index = cardIndex;
+            result.deckSize = CardCount;
+
+            return result;
         }
         #endregion
     }
